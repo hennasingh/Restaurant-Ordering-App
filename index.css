@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+} 
+
+.container {
+    margin: auto;
+    width: 700px;
+    align-items: center;
+}
+
+.header-image{
+    width: 700px;
+
+}
