@@ -29,6 +29,10 @@ function createHtml(menuArray) {
 document.addEventListener('click', function(event) {
     if(event.target.dataset.add) {
         handleAddClick(event.target.dataset.add)
+    } else if(event.target.dataset.remove) {
+        handleRemoveClick(event.target.dataset.remove)
+    } else if(event.target.id === 'complete-btn') {
+        handleCompleteBtnClick()
     }
 })
 
@@ -39,35 +43,51 @@ function handleAddClick(addId) {
 
 }
 
+function handleRemoveClick(removeId) {
+    if(orderFoodList.length == 1) {
+        orderFoodList.pop()
+        document.getElementById('confirmOrder').innerHTML = ''
+    } else {
+    const foodItem = orderFoodList.filter(item => item.id == removeId)[0]
+        orderFoodList.shift(foodItem)
+        displayOrder(orderFoodList)
+    }
+}
+
+function handleCompleteBtnClick() {
+    document.getElementById('modal').style.display = 'inline'
+}
+
 function displayOrder(orderFoodList) {
+
     let orderList = ``
     let foodTotal = 0
     let foodList = ``
 
-    orderFoodList.forEach(foodItem => {
-        console.log(foodItem)
-        foodTotal += foodItem.price
-        foodList += `                
-                <div class="order-inner">
-                    <h3>${foodItem.name}</h3>
-                    <p data-remove="${foodItem.id}">remove</p>
-                    <h3 class="order-price">$${foodItem.price}</h3>
+        orderFoodList.forEach(foodItem => {
+            foodTotal += foodItem.price
+            foodList += `                
+                    <div class="order-inner">
+                        <h3>${foodItem.name}</h3>
+                        <p data-remove="${foodItem.id}">remove</p>
+                        <h3 class="order-price">$${foodItem.price}</h3>
+                    </div>
+                `
+        })
+        orderList = `
+            <div class="order-details">
+                <h2>Your order</h2>
+                ${foodList}
+                <div class="order-total">
+                    <h3>Total Price:</h3>
+                    <h3 class="total">$${foodTotal}</h3>
                 </div>
-            `
-    })
-    orderList = `
-        <div class="order-details">
-            <h2>Your order</h2>
-            ${foodList}
-            <div class="order-total">
-                <h3>Total Price:</h3>
-                <h3 class="total">$${foodTotal}</h3>
+                <button id="complete-btn">Complete order</button>
             </div>
-            <button id="complete-order">Complete order</button>
-        </div>
-    `
-    document.getElementById('confirmOrder').innerHTML = orderList
+        `
+        document.getElementById('confirmOrder').innerHTML = orderList
 }
+
 function render() {
     document.getElementById('foodList').innerHTML = createHtml(menuArray)
 }

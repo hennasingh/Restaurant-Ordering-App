@@ -2,6 +2,9 @@
     <head>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
        <link rel="stylesheet" href="index.css">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="container">
@@ -13,6 +16,39 @@
                 <section id="confirmOrder"></section>
                 <section id="payOrder"></section>
             </main>
+
+            <div class="modal" id="modal">
+                <div class="modal-inner" id="modal-inner">
+                    <h2>Enter Card Details</h2>
+                    <form id="consent-form">
+                        <input 
+                            type="text" 
+                            name="userName"
+                            placeholder="Enter your name"
+                            aria-label="Full Name"
+                            required
+                        >
+                        <input 
+                            type="number" 
+                            name="cardNumber"
+                            placeholder="Enter card number"
+                            aria-Label = "Card Number"
+                            required
+                        >
+                        <input 
+                            type="password" 
+                            name="cardNumber"
+                            placeholder="Enter CVV"
+                            aria-Label = "CVV"
+                            required
+                        >
+                        <div class="modal-btn" id="modal-btn">
+                            <button type="submit" class="pay-btn">Pay</button>
+                        </div>
+                    </form>
+                            
+                 </div>
+            </div>
         </div>
 	<script src="index.js" type="module"></script>
     </body>
