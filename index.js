@@ -1,5 +1,23 @@
 import { menuArray  } from "./data.js"
 
+const payForm = document.getElementById('pay-form')
+
+payForm.addEventListener('submit', function(event) {
+    event.preventDefault()
+    const payFormData = new FormData(payForm)
+    const username = payFormData.get('userName')
+
+    let thankYouMsg = `
+        <div class="thank-you">
+            <h3>Thanks, ${username}! Your order is on its way!</h3>
+        </div>
+    `
+    document.getElementById('confirmOrder').innerHTML = ''
+    document.getElementById('payOrder').innerHTML = thankYouMsg
+    document.getElementById('modal').style.display = 'none'
+
+})
+
 const orderFoodList = []
 
 function createHtml(menuArray) {
@@ -27,6 +45,7 @@ function createHtml(menuArray) {
 }
 
 document.addEventListener('click', function(event) {
+   
     if(event.target.dataset.add) {
         handleAddClick(event.target.dataset.add)
     } else if(event.target.dataset.remove) {
