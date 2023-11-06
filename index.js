@@ -1,4 +1,5 @@
 import { menuArray  } from "./data.js"
+let orderFoodList = []
 
 const payForm = document.getElementById('pay-form')
 
@@ -15,10 +16,8 @@ payForm.addEventListener('submit', function(event) {
     document.getElementById('confirmOrder').innerHTML = ''
     document.getElementById('payOrder').innerHTML = thankYouMsg
     document.getElementById('modal').style.display = 'none'
-
+    orderFoodList = []
 })
-
-const orderFoodList = []
 
 function createHtml(menuArray) {
     let foodList = ``
@@ -56,6 +55,7 @@ document.addEventListener('click', function(event) {
 })
 
 function handleAddClick(addId) {
+    document.getElementById('payOrder').innerHTML = ''
     const foodItem = menuArray.filter(item => item.id == addId)[0]
     orderFoodList.push(foodItem)
     displayOrder(orderFoodList)    
