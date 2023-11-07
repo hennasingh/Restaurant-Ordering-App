@@ -8,7 +8,7 @@ payForm.addEventListener('submit', function(event) {
     const payFormData = new FormData(payForm)
     const username = payFormData.get('userName')
 
-    let thankYouMsg = `
+    const thankYouMsg = `
         <div class="thank-you">
             <h3>Thanks, ${username}! Your order is on its way!</h3>
         </div>
@@ -17,6 +17,7 @@ payForm.addEventListener('submit', function(event) {
     document.getElementById('payOrder').innerHTML = thankYouMsg
     document.getElementById('modal').style.display = 'none'
     orderFoodList = []
+    payForm.reset()
 })
 
 function createHtml(menuArray) {
@@ -67,8 +68,8 @@ function handleRemoveClick(removeId) {
         orderFoodList.pop()
         document.getElementById('confirmOrder').innerHTML = ''
     } else {
-    const foodItem = orderFoodList.filter(item => item.id == removeId)[0]
-        orderFoodList.shift(foodItem)
+        const foodItemIndex = orderFoodList.findIndex(item => item.id == removeId)
+        orderFoodList.splice(foodItemIndex, 1)
         displayOrder(orderFoodList)
     }
 }
